@@ -5,6 +5,7 @@ import React, { useMemo } from 'react'
 import {
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import mData from '../Mock_Data.json'
@@ -24,16 +25,7 @@ export default function BasicTables() {
         header: 'Name',
         accessorFn: (row: { first_name: any; last_name: any; }) => `${row.first_name} ${row.last_name}`,
       },
-      // {
-      //   header: 'First Name',
-      //   accessorKey: 'first_name',
-      //   footer: 'First Name',
-      // },
-      // {
-      //   header: 'Last Name',
-      //   accessorKey: 'last_name',
-      //   footer: 'Last Name',
-      // },
+      
       {
         header: 'Email',
         accessorKey: 'email',
@@ -61,6 +53,7 @@ export default function BasicTables() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
@@ -103,6 +96,49 @@ export default function BasicTables() {
           </tbody>
           
         </table>
+        <div className="flex items-center">
+  <button 
+    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
+    onClick={() => table.setPageIndex(0)}
+    disabled={!table.getCanPreviousPage()}
+  >
+    First
+  </button>
+  <button 
+    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
+    onClick={() => table.previousPage()}
+    disabled={!table.getCanPreviousPage()}
+  >
+    Previous
+  </button>
+  
+  
+  {Array.from({ length: table.getPageCount() }, (_, index) => (
+    <button 
+      key={index} 
+      className={`mx-2 py-2 px-4 rounded font-bold ${table.getState().pagination.pageIndex === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`} 
+      onClick={() => table.setPageIndex(index)}
+    >
+      {index + 1}
+    </button>
+  ))}
+  
+  <button 
+    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
+    onClick={() => table.nextPage()}
+    disabled={!table.getCanNextPage()}
+  >
+    Next
+  </button>
+  <button 
+    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
+    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+    disabled={!table.getCanNextPage()}
+  >
+    Last
+  </button>
+</div>
+
       </div>
     </div>
   )
