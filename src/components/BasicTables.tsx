@@ -22,7 +22,7 @@ export default function BasicTables() {
       },
       {
         header: 'Name',
-        accessorFn: row => `${row.first_name} ${row.last_name}`,
+        accessorFn: (row: { first_name: any; last_name: any; }) => `${row.first_name} ${row.last_name}`,
       },
       // {
       //   header: 'First Name',
@@ -50,7 +50,7 @@ export default function BasicTables() {
         accessorKey: 'dob', 
         footer: 'Date of Birth',
         cell: (info: { getValue: () => any; }) =>
-          DateTime.fromISO(info.getValue()).toLocaleString(DateTime.Date_MED),
+          DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
       },
       
     ],   
