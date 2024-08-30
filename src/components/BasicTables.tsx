@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import mData from '../Mock_Data.json'
-import { info } from 'console';
+
 
 export default function BasicTables() {
   const data = useMemo(() => mData, [])
@@ -96,21 +96,8 @@ export default function BasicTables() {
           </tbody>
           
         </table>
-        <div className="flex items-center">
-  <button 
-    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
-    onClick={() => table.setPageIndex(0)}
-    disabled={!table.getCanPreviousPage()}
-  >
-    First
-  </button>
-  <button 
-    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
-    onClick={() => table.previousPage()}
-    disabled={!table.getCanPreviousPage()}
-  >
-    Previous
-  </button>
+        <div className="flex items-center justify-center">
+  
   
   
   {Array.from({ length: table.getPageCount() }, (_, index) => (
@@ -123,20 +110,7 @@ export default function BasicTables() {
     </button>
   ))}
   
-  <button 
-    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
-    onClick={() => table.nextPage()}
-    disabled={!table.getCanNextPage()}
-  >
-    Next
-  </button>
-  <button 
-    className='mx-2 py-2 bg-gray-200 text-black font-bold px-4 rounded'
-    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-    disabled={!table.getCanNextPage()}
-  >
-    Last
-  </button>
+  
 </div>
 
       </div>
